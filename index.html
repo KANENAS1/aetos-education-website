@@ -1,0 +1,766 @@
+ <!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETOS Education - Professional STEM Programs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        overflow-x: hidden;
+    }
+    
+    /* Navigation */
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 15px 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .navbar.scrolled {
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+    }
+    
+    .logo {
+        font-size: 2em;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+    }
+    
+    .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .nav-links a:hover {
+        color: #667eea;
+    }
+    
+    .nav-links a:after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #667eea;
+        transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover:after {
+        width: 100%;
+    }
+    
+    .tools-dropdown {
+        position: relative;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background: white;
+        min-width: 200px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        border-radius: 10px;
+        padding: 10px 0;
+        top: 100%;
+        left: 0;
+        z-index: 1001;
+    }
+    
+    .dropdown-content a {
+        color: #333;
+        padding: 12px 20px;
+        text-decoration: none;
+        display: block;
+        transition: background 0.3s ease;
+    }
+    
+    .dropdown-content a:hover {
+        background: #f8fafc;
+        color: #667eea;
+    }
+    
+    .tools-dropdown:hover .dropdown-content {
+        display: block;
+    }
+    
+    /* Hero Section */
+    .hero {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,800 1000,1000"/></svg>');
+        background-size: cover;
+    }
+    
+    .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        text-align: center;
+        color: white;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .hero h1 {
+        font-size: 4em;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        animation: fadeInUp 1s ease;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5em;
+        margin-bottom: 30px;
+        opacity: 0.9;
+        animation: fadeInUp 1s ease 0.2s both;
+    }
+    
+    .hero-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+        animation: fadeInUp 1s ease 0.4s both;
+    }
+    
+    .feature-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .feature-icon {
+        font-size: 3em;
+        margin-bottom: 15px;
+        display: block;
+    }
+    
+    .feature-title {
+        font-size: 1.3em;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    
+    .feature-description {
+        opacity: 0.9;
+        font-size: 1em;
+    }
+    
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 40px;
+        animation: fadeInUp 1s ease 0.6s both;
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .btn-primary {
+        background: white;
+        color: #667eea;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    
+    .btn-secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+    }
+    
+    .btn-secondary:hover {
+        background: white;
+        color: #667eea;
+    }
+    
+    /* Tools Section */
+    .tools-section {
+        padding: 80px 0;
+        background: #f8fafc;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .section-title {
+        font-size: 2.5em;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #2d3748;
+    }
+    
+    .section-subtitle {
+        font-size: 1.2em;
+        text-align: center;
+        color: #718096;
+        max-width: 600px;
+        margin: 0 auto 50px;
+    }
+    
+    .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+    }
+    
+    .tool-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    
+    .tool-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        border-color: #667eea;
+    }
+    
+    .tool-icon {
+        font-size: 3em;
+        margin-bottom: 20px;
+        display: block;
+        text-align: center;
+    }
+    
+    .tool-title {
+        font-size: 1.4em;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .tool-description {
+        color: #718096;
+        text-align: center;
+        margin-bottom: 25px;
+        line-height: 1.6;
+    }
+    
+    .tool-link {
+        display: block;
+        text-align: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .tool-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    }
+    
+    /* Quick Stats */
+    .quick-stats {
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+        color: white;
+        padding: 60px 0;
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .stat-item {
+        padding: 20px;
+    }
+    
+    .stat-number {
+        font-size: 3em;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 10px;
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .stat-label {
+        font-size: 1.1em;
+        opacity: 0.9;
+    }
+    
+    /* Footer */
+    .footer {
+        background: #1a202c;
+        color: white;
+        padding: 50px 0 30px;
+    }
+    
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+    
+    .footer-section h3 {
+        font-size: 1.3em;
+        margin-bottom: 20px;
+        color: #667eea;
+    }
+    
+    .footer-section ul {
+        list-style: none;
+    }
+    
+    .footer-section ul li {
+        margin-bottom: 10px;
+    }
+    
+    .footer-section ul li a {
+        color: #a0aec0;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .footer-section ul li a:hover {
+        color: white;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid #2d3748;
+        color: #a0aec0;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+    }
+    
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-links.active {
+            display: flex;
+        }
+        
+        .hero h1 {
+            font-size: 2.5em;
+        }
+        
+        .hero-features {
+            grid-template-columns: 1fr;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .tools-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+    }
+    
+    .mobile-menu-btn span {
+        width: 25px;
+        height: 3px;
+        background: #333;
+        transition: all 0.3s ease;
+    }
+    
+    @media (max-width: 768px) {
+        .mobile-menu-btn {
+            display: flex;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">🚁 AETOS</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li class="tools-dropdown">
+                    <a href="#tools">Tools ▼</a>
+                    <div class="dropdown-content">
+                        <a href="tools/pricing-calculator.html">💰 Pricing Calculator</a>
+                        <a href="tools/curriculum-planner.html">📚 Curriculum Planner</a>
+                        <a href="tools/demo-scheduler.html">📅 Demo Scheduler</a>
+                        <a href="tools/roi-calculator.html">📊 ROI Calculator</a>
+                        <a href="tools/program-comparison.html">⚖️ Program Comparison</a>
+                        <a href="tools/contact-manager.html">📋 Contact Manager</a>
+                    </div>
+                </li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+```
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1>🚁 AETOS Education</h1>
+        <p class="hero-subtitle">Professional Drone & Robotics STEM Programs for NYC Schools</p>
+        
+        <div class="hero-features">
+            <div class="feature-card">
+                <span class="feature-icon">✈️</span>
+                <div class="feature-title">FAA-Certified</div>
+                <div class="feature-description">Professional instructors with official FAA drone pilot certification</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">💰</span>
+                <div class="feature-title">Affordable</div>
+                <div class="feature-description">Starting at $90 per student vs competitors at $100-$436</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🛠️</span>
+                <div class="feature-title">Complete Package</div>
+                <div class="feature-description">All equipment, curriculum, and safety gear included</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🎯</span>
+                <div class="feature-title">Career Ready</div>
+                <div class="feature-description">Programs prepare students for real STEM career opportunities</div>
+            </div>
+        </div>
+        
+        <div class="cta-buttons">
+            <a href="tools/demo-scheduler.html" class="btn btn-primary">📅 Schedule Free Demo</a>
+            <a href="tools/pricing-calculator.html" class="btn btn-secondary">💰 Calculate Pricing</a>
+            <a href="#programs" class="btn btn-secondary">📚 View Programs</a>
+        </div>
+    </div>
+</section>
+
+<!-- Tools Section -->
+<section id="tools" class="tools-section">
+    <div class="container">
+        <h2 class="section-title animate-on-scroll">Professional Tools & Resources</h2>
+        <p class="section-subtitle animate-on-scroll">Comprehensive tools to help schools plan, budget, and implement AETOS STEM programs effectively.</p>
+        
+        <div class="tools-grid">
+            <div class="tool-card animate-on-scroll">
+                <span class="tool-icon">💰</span>
+                <h3 class="tool-title">Pricing Calculator</h3>
+                <p class="tool-description">Calculate exact costs for your school's STEM program based on grade levels, duration, and student capacity.</p>
+                <a href="tools/pricing-calculator.html" class="tool-link">Launch Calculator</a>
+            </div>
+            
+            <div class="tool-card animate-on-scroll">
+                <span class="tool-icon">📚</span>
+                <h3 class="tool-title">Curriculum Planner</h3>
+                <p class="tool-description">Plan and customize AETOS curriculum to align with your school's STEM goals and academic calendar.</p>
+                <a href="tools/curriculum-planner.html" class="tool-link">Start Planning</a>
+            </div>
+            
+            <div class="tool-card animate-on-scroll">
+                <span class="tool-icon">📅</span>
+                <h3 class="tool-title">Demo Scheduler</h3>
+                <p class="tool-description">Schedule your free 60-minute demo assembly and see why 60% of schools book full programs.</p>
+                <a href="tools/demo-scheduler.html" class="tool-link">Schedule Demo</a>
+            </div>
+            
+            <div class="tool-card animate-on-scroll">
+                <span class="tool-icon">📊</span>
+                <h3 class="tool-title">ROI Calculator</h3>
+                <p class="tool-description">Calculate return on investment for STEM programs including student engagement and career preparation metrics.</p>
+                <a href="tools/roi-calculator.html" class="tool-link">Calculate ROI</a>
+            </div>
+            
+            <div class="tool-card animate-on-scroll">
+                <span class="tool-icon">⚖️</span>
+                <h3 class="tool-title">Program Comparison</h3>
+                <p class="tool-description">Compare AETOS programs with competitors on pricing, features, and educational outcomes.</p>
+                <a href="tools/program-comparison.html" class="tool-link">Compare Programs</a>
+            </div>
+            
+            <div class="tool-card animate-on-scroll">
+                <span class="tool-icon">📋</span>
+                <h3 class="tool-title">Contact Manager</h3>
+                <p class="tool-description">Manage school contacts, track demo requests, and organize follow-up communications effectively.</p>
+                <a href="tools/contact-manager.html" class="tool-link">Manage Contacts</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Stats -->
+<section class="quick-stats">
+    <div class="container">
+        <div class="stats-grid animate-on-scroll">
+            <div class="stat-item">
+                <span class="stat-number">$90</span>
+                <span class="stat-label">Starting Cost Per Student</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">60%</span>
+                <span class="stat-label">Demo Conversion Rate</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">6</span>
+                <span class="stat-label">Program Types Available</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">K-12</span>
+                <span class="stat-label">Complete Grade Coverage</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Equipment Included</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">NYC</span>
+                <span class="stat-label">Local Expert Support</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Programs</h3>
+                <ul>
+                    <li><a href="#programs">Foundational (K-5)</a></li>
+                    <li><a href="#programs">Intermediate (6-8)</a></li>
+                    <li><a href="#programs">Advanced (9-12)</a></li>
+                    <li><a href="#programs">After-School</a></li>
+                    <li><a href="#programs">Summer Camps</a></li>
+                    <li><a href="#programs">Teacher Development</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Tools</h3>
+                <ul>
+                    <li><a href="tools/pricing-calculator.html">Pricing Calculator</a></li>
+                    <li><a href="tools/curriculum-planner.html">Curriculum Planner</a></li>
+                    <li><a href="tools/demo-scheduler.html">Demo Scheduler</a></li>
+                    <li><a href="tools/roi-calculator.html">ROI Calculator</a></li>
+                    <li><a href="tools/program-comparison.html">Program Comparison</a></li>
+                    <li><a href="tools/contact-manager.html">Contact Manager</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#curriculum">Sample Curriculum</a></li>
+                    <li><a href="#safety">Safety Protocols</a></li>
+                    <li><a href="#pricing">Pricing Guide</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="mailto:info@aetos-education.com">info@aetos-education.com</a></li>
+                    <li><a href="tel:555-238-6733">(555) AETOS-ED</a></li>
+                    <li><a href="#contact">Schedule Demo</a></li>
+                    <li><a href="#newsletter">Newsletter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AETOS Education. All rights reserved. | Empowering the next generation through innovative STEM education.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Animate elements on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('active');
+    }
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.remove('active');
+        });
+    });
+</script>
+```
+
+</body>
+</html>
